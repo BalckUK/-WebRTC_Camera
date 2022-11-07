@@ -33,19 +33,25 @@ async function getCameras(){
 
 //Welcom Form (join a room)
 const welcome = document.getElementById("welcome");
-const wlecomeForm = welcome.querySelector("form");
+const welcomeForm = welcome.querySelector("form");
 
 call.hidden = true;
+
+function startMedia(){
+    welcome.hidden = true;
+    call.hidden = false;
+    getMedia();
+}
 
 
 function handleWelcomeSubmit(event){
     event.preventDefault();
-    const input = wlecomeForm.querySelector("input");
-    socket.emit("join_room", input.value);
+    const input = welcomeForm.querySelector("input");
+    socket.emit("join_room", input.value, startMedia);
     input.value = "";
 }
 
-wlecomeForm.addEventListener("submit", handleWelcomeSubmit);
+welcomeForm.addEventListener("submit", handleWelcomeSubmit);
 
 /*
 async function getMedia(){

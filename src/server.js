@@ -15,8 +15,9 @@ const httpServer = http.createServer(app);
 const wsSever = new Server(httpServer);
 
 wsSever.on("connection", (socket) => {
-    socket.on("join_room", (roomName) => {
+    socket.on("join_room", (roomName, done) => {
         socket.join(roomName);
+        done();
     });
 });
 
